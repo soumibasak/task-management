@@ -1,14 +1,14 @@
 // TaskDetails.js
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import './TaskDetails.css';
 const TaskDetails = ({ task }) => {
   return (
     <div>
       <h2>Task Details</h2>
-      <p>Title: {task.title}</p>
-      <p>Description: {task.description}</p>
-      <p>Status: {task.status}</p>
+      <p><label>Title: </label> {task.title}</p>
+      <p><label>Description: </label> {task.description}</p>
+      <p><label>Status:</label> {task.status}</p>
     </div>
   );
 };

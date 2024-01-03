@@ -1,6 +1,5 @@
 // TaskContext.js
-import React, { createContext, useReducer, useEffect } from 'react';
-import axios from 'axios';
+import React, { createContext, useReducer } from 'react';
 
 const initialState = {
   tasks: [],
@@ -43,49 +42,24 @@ const taskReducer = (state, action) => {
 const TaskProvider = ({ children }) => {
   const [state, dispatch] = useReducer(taskReducer, initialState);
 
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  const fetchTasks = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/posts');
-      console.log(response,"here")
-      dispatch({ type: 'SET_TASKS', payload: response.data.posts });
-    } catch (error) {
-      console.error('Error fetching tasks:', error);
-    }
+  const setTasks = (tasks) => {
+    dispatch({ type: 'SET_TASKS', payload: tasks });
   };
 
-  const addTask = async (task) => {
-    try {
-      const response = await axios.post('http://localhost:8080/posts', task);
-      dispatch({ type: 'ADD_TASK', payload: response.data.posts });
-    } catch (error) {
-      console.error('Error adding task:', error);
-    }
+  const addTask = (task) => {
+    dispatch({ type: 'ADD_TASK', payload: task });
   };
 
-  const removeTask = async (taskId) => {
-    try {
-      await axios.delete(`http://localhost:8080/posts/${taskId}`);
-      dispatch({ type: 'REMOVE_TASK', payload: taskId });
-    } catch (error) {
-      console.error('Error removing task:', error);
-    }
+  const removeTask = (taskId) => {
+    dispatch({ type: 'REMOVE_TASK', payload: taskId });
   };
 
-  const updateTask = async (taskId, formData) => {
-    try {
-      const response = await axios.put(`http://localhost:8080/posts/${taskId}`, formData);
-      dispatch({ type: 'UPDATE_TASK', payload: { id: taskId, formData: response.data.posts } });
-    } catch (error) {
-      console.error('Error updating task:', error);
-    }
+  const updateTask = (taskId, formData) => {
+    dispatch({ type: 'UPDATE_TASK', payload: { id: taskId, formData } });
   };
 
   return (
-    <TaskContext.Provider value={{ tasks: state.tasks, addTask, removeTask, updateTask }}>
+    <TaskContext.Provider value={{ tasks: state.tasks, setTasks, addTask, removeTask, updateTask }}>
       {children}
     </TaskContext.Provider>
   );

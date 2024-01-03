@@ -1,12 +1,12 @@
 // Task.js
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { TaskContext } from './TaskContext';
 import EditTaskForm from './EditTaskForm';
 import TaskDetails from './TaskDetails';
 import './Task.css';
 
 const Task = ({ task }) => {
-  const { tasks, setTasks, updateTask } = useContext(TaskContext);
+  const { tasks, setTasks, removeTask, updateTask } = useContext(TaskContext);
   const [showDetails, setShowDetails] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -35,13 +35,12 @@ const Task = ({ task }) => {
   return (
     <div className="task">
       <div className="task-list">
-                <li>
-                    <p className="task-title">{task.title}</p>
-                    <p><span style={{ color: "black" }}>Status: </span>{task.status}</p>
-                </li>
-                <button className="task-button" onClick={toggleDetails}>Details</button>
-                <button className="task-button" onClick={handleRemove} style={{ backgroundColor: "red" }}>Remove</button>
-            </div>
+        <li onClick={toggleDetails}>
+          <p className="task-title">{task.title}</p>
+          <p><span style={{ color: "black" }}>Status: </span>{task.status}</p>
+        <button className="task-button" onClick={handleRemove} style={{ backgroundColor: "red", color: "white" }}>Delete</button>
+        </li>
+      </div>
 
       {showDetails && (
         <div className="modal">
@@ -54,9 +53,9 @@ const Task = ({ task }) => {
             ) : (
               <div>
                 <TaskDetails task={task} />
-                <div className="button-container">
-                  <button onClick={handleEditClick}>Edit</button>
-                  <button onClick={handleRemove}>Delete</button>
+                <div>
+                  <button onClick={handleEditClick} className="task-button">Edit</button>
+                  <button onClick={handleRemove} className="task-button" style={{ backgroundColor: "red", color: "white" }}>Delete</button>
                 </div>
               </div>
             )}

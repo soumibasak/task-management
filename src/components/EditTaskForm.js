@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-
+import './EditTask.css'
 const EditTaskForm = ({ task, onEdit, onClose }) => {
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
@@ -20,7 +20,7 @@ const EditTaskForm = ({ task, onEdit, onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit}>
       <label>
         Title:
         <input type="text" defaultValue={task.title} ref={titleRef} required />
@@ -32,12 +32,17 @@ const EditTaskForm = ({ task, onEdit, onClose }) => {
       <label>
         Status:
         <select defaultValue={task.status} ref={statusRef}>
-          <option value="todo">Todo</option>
-          <option value="in-progress">In Progress</option>
-          <option value="done">Done</option>
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Done">Done</option>
         </select>
       </label>
-      <button type="submit">Save</button>
+      <div className="actions" style={{marginTop: "16px"}}>
+                <button type="submit">Save</button>
+                <button type="button" onClick={onClose}>
+                  Cancel
+                </button>
+                </div>
     </form>
   );
 };
