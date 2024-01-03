@@ -1,4 +1,3 @@
-// TaskDetails.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import './TaskDetails.css';

@@ -25,11 +25,11 @@ const TaskForm = () => {
 
   return (
     <div className="task-form-container">
-         <header className="header">
-<p>
-<button onClick={handleToggleForm} className="button">New Post</button>
-</p>
-         </header>
+      <header className="header">
+        <p>
+          <button onClick={handleToggleForm} className="button">New Post</button>
+        </p>
+      </header>
       {showForm && (
         <div className="modal">
           <div className="modal-content">
@@ -68,7 +68,7 @@ const TaskForm = () => {
                   <option value="Completed">Completed</option>
                 </select>
               </label>
-              <div className="actions" style={{marginTop: "16px"}}>
+              <div className="actions" style={{ marginTop: "16px" }}>
                 <button type="submit">Save</button>
                 <button type="button" onClick={handleToggleForm}>
                   Cancel

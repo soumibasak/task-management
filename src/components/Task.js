@@ -1,12 +1,11 @@
-// Task.js
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useState } from 'react';
 import { TaskContext } from './TaskContext';
 import EditTaskForm from './EditTaskForm';
 import TaskDetails from './TaskDetails';
 import './Task.css';
 
 const Task = ({ task }) => {
-  const { tasks, setTasks, removeTask, updateTask } = useContext(TaskContext);
+  const { tasks, setTasks, updateTask } = useContext(TaskContext);
   const [showDetails, setShowDetails] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
