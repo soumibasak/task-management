@@ -4,7 +4,7 @@ import { TaskContext } from './TaskContext';
 import './TaskForm.css';
 
 const TaskForm = () => {
-  const { addTask } = useContext(TaskContext);
+  const { addTask, fetchData } = useContext(TaskContext);
   const [formData, handleChange, resetForm] = useTaskForm({
     title: '',
     description: '',
@@ -16,9 +16,10 @@ const TaskForm = () => {
     setShowForm(!showForm);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addTask(formData);
+    await addTask(formData);
+    fetchData();
     resetForm();
     setShowForm(false);
   };

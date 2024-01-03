@@ -5,18 +5,19 @@ import TaskDetails from './TaskDetails';
 import './Task.css';
 
 const Task = ({ task }) => {
-  const { tasks, setTasks, updateTask } = useContext(TaskContext);
+  const {removeTask, updateTask, fetchData } = useContext(TaskContext);
   const [showDetails, setShowDetails] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleRemove = () => {
-    const updatedTasks = tasks.filter((t) => t.id !== task.id);
-    setTasks(updatedTasks);
+  const handleRemove = async () => {
+    await removeTask(task.id);
+    fetchData();
     setShowDetails(false);
   };
 
-  const handleEdit = (formData) => {
-    updateTask(task.id, formData);
+  const handleEdit = async (formData) => {
+    await updateTask(task.id, formData);
+    fetchData();
     setShowDetails(false);
     setIsEditing(false);
   };
