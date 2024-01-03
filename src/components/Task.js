@@ -35,7 +35,9 @@ const Task = ({ task }) => {
     <div className="task">
       <div className="task-list">
         <li onClick={toggleDetails}>
+          <div style={{height: "30px"}}>
           <p className="task-title">{task.title}</p>
+          </div>
           <p><span style={{ color: "black" }}>Status: </span>{task.status}</p>
         <button className="task-button" onClick={handleRemove} style={{ backgroundColor: "red", color: "white" }}>Delete</button>
         </li>
